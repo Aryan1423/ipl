@@ -1,41 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Live Video Full Screen</title>
-  <style>
-    /* Remove default margins and ensure full height */
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-    }
-    /* Container to hold the video */
-    .video-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-    }
-    /* Iframe styling for full screen */
-    .video-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Sports Hindi Live - Full Screen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+        }
+        #live-video {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .fullscreen-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <div class="video-container">
-    <!-- Replace the src attribute with your live stream link if needed -->
-    <iframe src="https://cdn.crichdplays.ru/embed2.php?id=starsp3"
-            allow="autoplay; fullscreen; picture-in-picture"
+    <div id="video-container">
+        <iframe 
+            id="live-video"
+            src="https://cdn.crichdplays.ru/embed2.php?id=starsp3" 
+            allow="autoplay; fullscreen; picture-in-picture" 
+            frameborder="0" 
             allowfullscreen>
-    </iframe>
-  </div>
+        </iframe>
+    </div>
+
+    <button class="fullscreen-button" onclick="toggleFullScreen()">Open Full Screen</button>
+
+    <script>
+        // Mobile redirect
+        const isMobile = {
+            Android: () => navigator.userAgent.match(/Android/i),
+            BlackBerry: () => navigator.userAgent.match(/BlackBerry/i),
+            iOS: () => navigator.userAgent.match(/iPhone|iPad|iPod/i),
+            Opera: () => navigator.userAgent.match(/Opera Mini/i),
+            Windows: () => navigator.userAgent.match(/IEMobile/i),
+            any: () => (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows())
+        };
+        
+        if(isMobile.any()) {
+            window.location.href = "//crichdplayer.org/star-sports-hindi-live-streaming?v=m&fullscreen=1";
+        }
+
+        // Fullscreen toggle
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Auto fullscreen on desktop
+        if (!isMobile.any()) {
+            setTimeout(toggleFullScreen, 1000);
+        }
+    </script>
 </body>
 </html>
