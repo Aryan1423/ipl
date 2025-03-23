@@ -1,60 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IPL 2025 Live Stream - Full Screen</title>
-  <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
+  <title>Live Video Full Screen</title>
   <style>
+    /* Remove default margins and ensure full height */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      width: 100%;
-      background-color: black;
       overflow: hidden;
     }
-    .video-js {
+    /* Container to hold the video */
+    .video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
+      background: #000;
+    }
+    /* Iframe styling for full screen */
+    .video-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
   </style>
 </head>
 <body>
-  <video
-    id="my-video"
-    class="video-js vjs-default-skin"
-    controls
-    preload="auto"
-    width="100%"
-    height="100%"
-    data-setup='{}'>
-    <source src="https://c4s22.vfruitfairy.com/com9/index.m3u8" type="application/x-mpegurl">
-    <p class="vjs-no-js">
-      To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video.
-    </p>
-  </video>
-
-  <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
-  <script>
-    var player = videojs('my-video');
-    player.ready(function() {
-      this.play(); // Autoplay when ready
-      
-      // Attempt to switch to full screen upon playback (requires user gesture in some browsers)
-      this.on('play', function() {
-        var videoEl = document.getElementById('my-video');
-        if (videoEl.requestFullscreen) {
-          videoEl.requestFullscreen();
-        } else if (videoEl.mozRequestFullScreen) { // Firefox
-          videoEl.mozRequestFullScreen();
-        } else if (videoEl.webkitRequestFullscreen) { // Chrome, Safari and Opera
-          videoEl.webkitRequestFullscreen();
-        } else if (videoEl.msRequestFullscreen) { // IE/Edge
-          videoEl.msRequestFullscreen();
-        }
-      });
-    });
-  </script>
+  <div class="video-container">
+    <!-- Replace the src attribute with your live stream link if needed -->
+    <iframe src="https://cdn.crichdplays.ru/embed2.php?id=starsp3"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen>
+    </iframe>
+  </div>
 </body>
 </html>
